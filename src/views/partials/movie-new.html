@@ -1,0 +1,95 @@
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#/movies">Movies</a></li>
+    <li class="active" ng-show="!movie.id">New movie</li>
+    <li class="active" ng-show="movie.id">Edit movie</li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Movie</h3>
+            </div>
+            <form name="movieForm" novalidate>
+                <div class="panel-body">
+                    <div class="form-group col-md-12">
+                        <label for="name" class="col-md-2 control-label require">Name</label>
+
+                        <div class="col-md-10">
+                            <input type="text" ng-model="movie.name" class="form-control" id="name" name="name"
+                                   required>
+                            <span ng-show="movieForm.name.$invalid && movieForm.name.$dirty"
+                                  class="help-block error">This field is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="overview" class="col-md-2 control-label require">Overview</label>
+
+                        <div class="col-md-10">
+                            <textarea type="text" ng-model="movie.overview" class="form-control" id="overview"
+                                      name="overview" required></textarea>
+                           <span ng-show="movieForm.overview.$invalid && movieForm.overview.$dirty"
+                                 class="help-block error">This field is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="release_year" class="col-md-2 control-label require">Release year</label>
+
+                        <div class="col-md-10">
+                            <select id="release_year" ng-model="movie.release_year"
+                                    ng-options="n for n in [] | range:1950:2015" class="form-control"
+                                    required=""></select>
+                            <span ng-show="movieForm.release_year.$invalid && movieForm.release_year.$dirty"
+                                  class="help-block error">This field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="gross_income" class="col-md-2 control-label">Gross income</label>
+
+                        <div class="col-md-10">
+                            <input type="number" ng-model="movie.gross_income" class="form-control" id="gross_income">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="director" class="col-md-2 control-label">Director</label>
+
+                        <div class="col-md-10">
+                            <input type="text" ng-model="movie.director" class="form-control" id="director">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="genre" class="col-md-2 control-label require">Genre</label>
+
+                        <div class="col-md-10">
+                            <select ui-select2="{width: '100%'}" multiple name="genre" ng-model='movie.genre' required>
+                                <option ng-repeat="item in genreOptions" ng-bind="item.name"
+                                        value="{{ item.id }}"></option>
+                            </select>
+                             <span ng-show="movieForm.genre.$invalid && movieForm.genre.$dirty"
+                                   class="help-block error">This field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-6 col-lg-offset-2">
+                            <a type="reset" class="btn btn-default" href="#/movies">Cancel</a>
+                            <button type="submit" class="btn btn-primary" ng-show="movie.id"
+                                    ng-click="updateMovie(movieForm.$valid)"
+                                    ng-disabled="movieForm.$invalid">Update
+                            </button>
+                            <button type="submit" class="btn btn-primary" ng-show="!movie.id"
+                                    ng-click="createMovie(movieForm.$valid)"
+                                    ng-disabled="movieForm.$invalid">Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

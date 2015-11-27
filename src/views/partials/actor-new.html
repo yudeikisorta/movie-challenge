@@ -1,0 +1,83 @@
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#/actors">Actors</a></li>
+    <li class="active" ng-show="!actor.id">New actor</li>
+    <li class="active" ng-show="actor.id">Edit actor</li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Actor</h3>
+            </div>
+
+            <form name="actorForm" novalidate>
+                <div class="panel-body">
+                    <div class="form-group col-md-12">
+                        <label for="first_name" class="col-md-2 control-label require">First Name</label>
+
+                        <div class="col-md-10">
+                            <input type="text" ng-model="actor.first_name" class="form-control" id="first_name"
+                                   name="first_name" required>
+                            <span ng-show="actorForm.first_name.$invalid && actorForm.first_name.$dirty"
+                                  class="help-block error">This field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="last_name" class="col-md-2 control-label">Last Name</label>
+
+                        <div class="col-md-10">
+                            <input type="text" ng-model="actor.last_name" class="form-control" id="last_name">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="gender" class="col-md-2 control-label require">Gender</label>
+
+                        <div class="col-md-10">
+                            <select ui-select2="{width: '100%'}" id="gender" name="gender" ng-model="actor.gender"
+                                    required>
+                                <option value="f">Female</option>
+                                <option value="m">Male</option>
+                            </select>
+                            <span ng-show="actorForm.gender.$invalid && actorForm.gender.$dirty"
+                                  class="help-block error">This field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="birth_date" class="col-md-2 control-label">Birth Date</label>
+
+                        <div class="col-md-10">
+                            <datepicker date-format="dd/M/yyyy" selector="form-control">
+                                <div class="input-group">
+                                    <input id="birth_date" placeholder="Choose a date" class="form-control"
+                                           ng-model="actor.birth_date"/>
+                                    <span class="input-group-addon" style="cursor: pointer"><i
+                                            class="fa fa-lg fa-calendar"></i></span>
+                                </div>
+                            </datepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-6 col-lg-offset-2">
+                            <a type="reset" class="btn btn-default" href="#/actors">Cancel</a>
+                            <button type="submit" class="btn btn-primary" ng-show="actor.id"
+                                    ng-click="updateActor(actorForm.$valid)"
+                                    ng-disabled="actorForm.$invalid">Update
+                            </button>
+                            <button type="submit" class="btn btn-primary" ng-show="!actor.id"
+                                    ng-click="createActor(actorForm.$valid)"
+                                    ng-disabled="actorForm.$invalid">Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

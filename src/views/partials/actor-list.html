@@ -1,0 +1,68 @@
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Actors</li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <div class="col-md-6 col-xs-6">
+                <h1>Actors</h1>
+            </div>
+            <a class="btn btn-primary pull-right" href="#/actors/create"><i class="fa fa-plus"></i> Create</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="bs-component">
+            <div ng-show="actors.length">
+                <div class="col-md-2 pull-right" style="padding-right: 0">
+                    <label>Items per page:</label>
+                    <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                </div>
+
+                <div class="col-md-3 pull-right">
+                    <label>Search:</label>
+                    <input ng-model="q" id="search" class="form-control" placeholder="Filter actors">
+                </div>
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Birth Date</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr dir-paginate="item in actors | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                        <td style="width: 30%"><a ng-href="#/actors/detail/{{item.id}}">
+                            {{ item.first_name | capitalize }} {{ item.last_name | capitalize}}</a></td>
+                        <td ng-show="item.gender  == 'f'">Female</td>
+                        <td ng-show="item.gender  == 'm'">Male</td>
+                        <td>{{ item.birth_date }}</td>
+                        <td style="text-align: center">
+                            <a class="btn btn-sm btn-primary" title="Edit" ng-href="#/actors/edit/{{item.id}}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button class="btn btn-sm btn-danger"
+                                    ng-bootbox-confirm="Are you sure you want to delete actor: {{item.name}}?"
+                                    ng-bootbox-confirm-action="deleteActor(item.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <dir-pagination-controls boundary-links="true" class="pull-right"></dir-pagination-controls>
+            </div>
+
+            <div class="alert alert-danger" ng-hide="actors.length">
+                <p>There aren't actors in the list. If you want to create a new one click here
+                    <a href="#/actors/create" class="alert-link">Create Actor</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>

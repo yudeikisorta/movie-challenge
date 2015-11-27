@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="challengeApp">
+<head>
+    <title>Jobsity</title>
+
+   <!-- inject:css -->
+    <link rel="stylesheet" href="../assets/sass/main.css">
+    <link rel="stylesheet" href="../../bower_components/select2/select2.css">
+    <link rel="stylesheet" href="../../bower_components/angular-input-stars-directive/angular-input-stars.css">
+    <link rel="stylesheet" href="../../bower_components/angularjs-datepicker/src/css/angular-datepicker.css">
+    <!-- endinject -->
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#/home" class="navbar-brand">Challenge</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#/movies">Movies</a>
+                    </li>
+                    <li>
+                        <a href="#/actors">Actor</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top: 100px">
+        <div ng-view></div>
+    </div>
+
+
+<!-- inject:js -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/select2/select2.js"></script>
+
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.min.js"></script>
+
+    <script src="../../bower_components/angular-ui-select2/src/select2.js"></script>
+    <script src="../../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+    <script src="../../bower_components/bootbox/bootbox.js"></script>
+    <script src="../../bower_components/ngBootbox/dist/ngBootbox.min.js"></script>
+
+    <script src="../../bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>
+
+    <script src="../../bower_components/angular-input-stars-directive/angular-input-stars.js"></script>
+    <script src="../../bower_components/angular-websql/angular-websql.min.js"></script>
+
+    <script src="../../bower_components/angularUtils-pagination/dirPagination.js"></script>
+
+    <script src="../app.js"></script>
+    <script src="../routing.js"></script>
+
+    <script src="../services/databaseService.js"></script>
+
+    <script src="../controllers/movieController.js"></script>
+    <script src="../services/movieService.js"></script>
+
+    <script src="../controllers/actorController.js"></script>
+<!-- endinject -->
+</body>
+</html>

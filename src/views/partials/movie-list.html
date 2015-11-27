@@ -1,0 +1,74 @@
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Movies</li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <div class="col-md-6">
+                <h1>Movies</h1>
+            </div>
+            <a class="btn btn-primary pull-right" href="#/movies/create"><i class="fa fa-plus"></i> Create</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="bs-component">
+            <div ng-show="movies.length">
+                <div class="col-md-2 pull-right" style="padding-right: 0">
+                    <label>Items per page:</label>
+                    <input type="number" id="paginate" min="1" max="100" class="form-control" ng-model="pageSize">
+                </div>
+
+                <div class="col-md-3 pull-right">
+                    <label>Search:</label>
+                    <input ng-model="q" id="search" class="form-control" placeholder="Filter movies">
+                </div>
+
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                        <th>Rating</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="item in movies | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                        <td style="width: 30%"><a ng-href="#/movies/detail/{{item.id}}">{{ item.name | capitalize }}</a>
+                        </td>
+                        <td style="width: 15%">{{ item.release_year }}</td>
+                        <td style="width: 20%">{{ item.director | capitalize }}</td>
+                        <td style="width: 15%" ng-if="item.rating">{{ item.rating }}</td>
+                        <td style="width: 15%" ng-if="!item.rating"> ---</td>
+                        <td style="text-align: center">
+                            <a class="btn btn-sm btn-success" title="Actors" ng-href="#/movies/edit/{{item.id}}/actors">
+                                <i class="fa fa-users"></i> </a>
+                            <a class="btn btn-sm btn-primary" title="Edit" ng-href="#/movies/edit/{{item.id}}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button class="btn btn-sm btn-danger" title="Delete"
+                                    ng-bootbox-confirm="Are you sure you want to delete movie: {{item.name}}?"
+                                    ng-bootbox-confirm-action="deleteMovie(item.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <dir-pagination-controls boundary-links="true" class="pull-right"></dir-pagination-controls>
+            </div>
+
+            <div class="alert alert-danger" ng-show="!movies.length">
+                <p>There aren't movies in the list. If you want to create a new one click here
+                    <a href="#/movies/create" class="alert-link">Create Movie</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
