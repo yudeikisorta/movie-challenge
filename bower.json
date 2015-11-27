@@ -1,0 +1,28 @@
+{
+  "name": "angular-challenge",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular":"~1.4.x",
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "font-awesome": "fontawesome#~4.2.0",
+    "angular-route": "~1.4.8",
+    "ngBootbox": "~0.1.2",
+    "angular-ui-select2": "~0.0.5",
+    "angularjs-datepicker": "~0.2.13",
+    "angular-websql": "~1.0.2",
+    "angular-input-stars-directive": "angular-input-stars#*",
+    "angular-bootstrap": "~0.14.3",
+    "angularUtils-pagination": "angular-utils-pagination#~0.9.2"
+  },
+  "resolutions": {
+    "angular": "~1.4.x"
+  }
+}
