@@ -1,4 +1,4 @@
-<div class="col-md-6" ng-show="movies.length" ng-repeat="item in movies">
+<div class="col-md-6" data-ng-show="movies.length" data-ng-repeat="item in movies">
     <div class="jumbotron" style="padding: 20px">
         <div class="row">
             <div class="col-md-10">
@@ -7,13 +7,13 @@
                 <span>Year: {{ item.release_year}}</span>
             </div>
 
-            <p><a class="btn btn-primary btn-md" href="#/movies/detail/{{item.id}}">Detail</a></p>
+            <p><a class="btn btn-primary btn-md" data-ng-href="#/movies/detail/{{item.id}}">Detail</a></p>
         </div>
     </div>
 </div>
 
 
-<div class="jumbotron" ng-hide="movies.length">
+<div class="jumbotron" data-ng-hide="movies.length">
     <p>There are no movies added. To add a new one click on the link below.</p>
-    <p><a class="btn btn-primary btn-lg" href="#/movies/create">Movie</a></p>
+    <p><a class="btn btn-primary btn-lg" data-ng-href="#/movies/create">Movie</a></p>
 </div>

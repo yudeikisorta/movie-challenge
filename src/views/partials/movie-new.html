@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="#/movies">Movies</a></li>
+    <li><a data-ng-href="#">Home</a></li>
+    <li><a data-ng-href="#/movies">Movies</a></li>
     <li class="active" ng-show="!movie.id">New movie</li>
     <li class="active" ng-show="movie.id">Edit movie</li>
 </ul>
@@ -65,7 +65,7 @@
                         <label for="genre" class="col-md-2 control-label require">Genre</label>
 
                         <div class="col-md-10">
-                            <select ui-select2="{width: '100%'}" multiple name="genre" ng-model='movie.genre' required>
+                            <select ui-select2="{width: '100%'}" multiple name="genre" id="genre" ng-model='movie.genre' required>
                                 <option ng-repeat="item in genreOptions" ng-bind="item.name"
                                         value="{{ item.id }}"></option>
                             </select>
@@ -76,7 +76,7 @@
 
                     <div class="form-group col-md-12">
                         <div class="col-md-6 col-lg-offset-2">
-                            <a type="reset" class="btn btn-default" href="#/movies">Cancel</a>
+                            <a type="reset" class="btn btn-default" data-ng-href="#/movies">Cancel</a>
                             <button type="submit" class="btn btn-primary" ng-show="movie.id"
                                     ng-click="updateMovie(movieForm.$valid)"
                                     ng-disabled="movieForm.$invalid">Update

@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="#/movies">Movies</a></li>
+    <li><a data-ng-href="#">Home</a></li>
+    <li><a data-ng-href="#/movies">Movies</a></li>
     <li class="active">Actors</li>
 </ul>
 
@@ -19,19 +19,19 @@
 <div class="row">
     <div class="col-md-5">
         <select style="margin-bottom: 20px" data-placeholder="Search" ui-select2="{width: '100%'}"
-                ng-model='selectedActor' ng-change="addActor()">
+                data-ng-model='selectedActor' data-ng-change="addActor()">
             <option value=""></option>
-            <option ng-repeat="item in actors"
+            <option data-ng-repeat="item in actors"
                     value="{{ item.id }}">{{ item.first_name | capitalize }} {{ item.last_name | capitalize}}
             </option>
         </select>
 
         <div style="max-height: 320px; overflow-y: auto">
-            <table class="table table-striped table-hover" ng-show="filteredActors.length">
+            <table class="table table-striped table-hover" data-ng-show="filteredActors.length">
                 <tbody>
-                <tr ng-repeat="item in filteredActors">
-                    <td style="width: 5%"><i class="fa fa-remove" ng-click="removeActorFromMovie(item.id)"></i></td>
-                    <td><a ng-href="#/actors/edit/{{item.id}}">
+                <tr data-ng-repeat="item in filteredActors">
+                    <td style="width: 5%"><i class="fa fa-remove" data-ng-click="removeActorFromMovie(item.id)"></i></td>
+                    <td><a data-ng-href="#/actors/edit/{{item.id}}">
                         {{ item.first_name | capitalize }} {{ item.last_name | capitalize}}</a>
                     </td>
                 </tr>
@@ -39,7 +39,7 @@
             </table>
         </div>
 
-        <div class="alert alert-danger" ng-show="!filteredActors.length">
+        <div class="alert alert-danger" data-ng-show="!filteredActors.length">
             <p>There aren't actors added to this movie.</p>
         </div>
     </div>
@@ -54,9 +54,9 @@
                         <label for="first_name" class="col-md-3 control-label require">First Name</label>
 
                         <div class="col-md-9">
-                            <input type="text" ng-model="actor.first_name" class="form-control" id="first_name"
+                            <input type="text" data-ng-model="actor.first_name" class="form-control" id="first_name"
                                    required>
-                            <span ng-show="actorForm.first_name.$invalid && actorForm.first_name.$dirty"
+                            <span data-ng-show="actorForm.first_name.$invalid && actorForm.first_name.$dirty"
                                   class="help-block error">This field is required.</span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                         <label for="last_name" class="col-md-3 control-label">Last Name</label>
 
                         <div class="col-md-9">
-                            <input type="text" ng-model="actor.last_name" class="form-control" id="last_name">
+                            <input type="text" data-ng-model="actor.last_name" class="form-control" id="last_name">
                         </div>
                     </div>
 
@@ -73,11 +73,11 @@
                         <label for="gender" class="col-md-3 control-label require">Gender</label>
 
                         <div class="col-md-9">
-                            <select id="gender" ui-select2="{width: '100%'}" ng-model="actor.gender" required>
+                            <select id="gender" ui-select2="{width: '100%'}" data-ng-model="actor.gender" required>
                                 <option value="f">Female</option>
                                 <option value="m">Male</option>
                             </select>
-                            <span ng-show="actorForm.gender.$invalid && actorForm.gender.$dirty"
+                            <span data-ng-show="actorForm.gender.$invalid && actorForm.gender.$dirty"
                                   class="help-block error">This field is required.</span>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                             <datepicker date-format="dd/M/yyyy" selector="form-control">
                                 <div class="input-group">
                                     <input id="birth_date" placeholder="Choose a date" class="form-control"
-                                           ng-model="actor.birth_date"/>
+                                           data-ng-model="actor.birth_date"/>
                                     <span class="input-group-addon" style="cursor: pointer"><i
                                             class="fa fa-lg fa-calendar"></i></span>
                                 </div>
@@ -99,9 +99,9 @@
 
                     <div class="form-group col-md-12">
                         <div class="col-md-6 col-lg-offset-3">
-                            <a type="reset" class="btn btn-default" href="#/movies">Cancel</a>
-                            <button type="submit" class="btn btn-primary" ng-click="createActor()"
-                                    ng-disabled="actorForm.$invalid">Add</button>
+                            <a type="reset" class="btn btn-default" data-ng-href="#/movies">Cancel</a>
+                            <button type="submit" class="btn btn-primary" data-ng-click="createActor()"
+                                    data-ng-disabled="actorForm.$invalid">Add</button>
                         </div>
                     </div>
                 </div>

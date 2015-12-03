@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="#/movies">Movies</a></li>
+    <li><a data-ng-href="#">Home</a></li>
+    <li><a data-ng-href="#/movies">Movies</a></li>
     <li class="active">Detail</li>
 </ul>
 
@@ -18,7 +18,7 @@
                 <p><strong>Gross income:</strong> {{ movie.gross_income }}</p>
 
                 <p><strong>Genre:</strong>
-                    <span class="label label-primary" style="margin-left: 5px" ng-repeat="item in movie.genre">{{ item }}</span>
+                    <span class="label label-primary" style="margin-left: 5px" data-ng-repeat="item in movie.genre">{{ item }}</span>
                 </p>
 
                 <p><strong>Overview:</strong>
@@ -27,8 +27,8 @@
             </div>
 
             <div class="col-md-5">
-                <h3 ng-if="movie.rating">Average: {{ movie.rating }} with {{ movie.votes_count }} votes</h3>
-                <input-stars max="10" ng-model="last_rate" ng-change="updateRating(last_rate)"></input-stars>
+                <h3 data-ng-if="movie.rating">Average: {{ movie.rating }} with {{ movie.votes_count }} votes</h3>
+                <input-stars max="10" data-ng-model="last_rate" data-ng-change="updateRating(last_rate)"></input-stars>
             </div>
         </div>
 
@@ -39,15 +39,15 @@
             </a>
 
             <div style="max-height: 350px; overflow-y: auto">
-                <a ng-repeat="actor in actors" href="#/actors/detail/{{actor.id}}" class="list-group-item">
+                <a data-ng-repeat="actor in actors" data-ng-href="#/actors/detail/{{actor.id}}" class="list-group-item">
                     {{actor.first_name | capitalize}} {{actor.last_name | capitalize }}
                 </a>
             </div>
         </div>
 
-        <div class="alert alert-danger col-md-8" ng-hide="actors.length">
+        <div class="alert alert-danger col-md-8" data-ng-hide="actors.length">
             <p>There aren't actors added to this movie. If you want to add one click here
-                <a href="#/movies/edit/{{movie.id}}/actors" class="alert-link">Add actor</a>.</p>
+                <a data-ng-href="#/movies/edit/{{movie.id}}/actors" class="alert-link">Add actor</a>.</p>
         </div>
     </div>
 </div>

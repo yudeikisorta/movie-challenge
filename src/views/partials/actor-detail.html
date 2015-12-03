@@ -9,22 +9,22 @@
         <h3 class="panel-title">{{actor.first_name | capitalize }} {{actor.last_name | capitalize }}</h3>
     </div>
     <div class="panel-body">
-        <p ng-show="actor.gender  == 'f'"><strong>Gender:</strong> Female</p>
+        <p data-ng-show="actor.gender  == 'f'"><strong>Gender:</strong> Female</p>
 
-        <p ng-show="actor.gender  == 'm'"><strong>Gender:</strong> Male</p>
+        <p data-ng-show="actor.gender  == 'm'"><strong>Gender:</strong> Male</p>
 
         <p><strong>Birth Date:</strong> {{ actor.birth_date }}</p>
 
         <hr/>
-        <div class="list-group col-md-6" ng-show="movies.length">
+        <div class="list-group col-md-6" data-ng-show="movies.length">
             <a class="list-group-item">
                 <strong>MOVIES</strong>
             </a>
-            <a ng-repeat="movie in movies" href="#/movies/detail/{{movie.id}}" class="list-group-item">
+            <a data-ng-repeat="movie in movies" data-ng-href="#/movies/detail/{{movie.id}}" class="list-group-item">
                 {{movie.name | capitalize}}
             </a>
         </div>
-        <div class="alert alert-danger col-md-4" ng-show="!movies.length">
+        <div class="alert alert-danger col-md-4" data-ng-show="!movies.length">
             {{actor.first_name | capitalize }} {{actor.last_name | capitalize }} didn't act in any movie.
         </div>
     </div>
