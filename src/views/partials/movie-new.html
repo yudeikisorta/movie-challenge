@@ -39,25 +39,31 @@
                         <div class="col-md-10">
                             <select id="release_year" ng-model="movie.release_year"
                                     ng-options="n for n in [] | range:1950:2015" class="form-control"
-                                    required=""></select>
+                                    required></select>
                             <span ng-show="movieForm.release_year.$invalid && movieForm.release_year.$dirty"
                                   class="help-block error">This field is required.</span>
                         </div>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="gross_income" class="col-md-2 control-label">Gross income</label>
+                        <label for="gross_income" class="col-md-2 control-label require">Gross income</label>
 
                         <div class="col-md-10">
-                            <input type="number" ng-model="movie.gross_income" class="form-control" id="gross_income">
+                            <input type="number" ng-model="movie.gross_income" class="form-control" id="gross_income"
+                                   name="gross_income" required>
+                             <span ng-show="movieForm.gross_income.$invalid && movieForm.gross_income.$dirty"
+                                   class="help-block error">This field is required.</span>
                         </div>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="director" class="col-md-2 control-label">Director</label>
+                        <label for="director" class="col-md-2 control-label require">Director</label>
 
                         <div class="col-md-10">
-                            <input type="text" ng-model="movie.director" class="form-control" id="director">
+                            <input type="text" ng-model="movie.director" class="form-control" id="director" name="director"
+                                   required>
+                            <span ng-show="movieForm.director.$invalid && movieForm.director.$dirty"
+                                  class="help-block error">This field is required.</span>
                         </div>
                     </div>
 

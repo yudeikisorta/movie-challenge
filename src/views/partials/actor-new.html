@@ -19,17 +19,24 @@
 
                         <div class="col-md-10">
                             <input type="text" data-ng-model="actor.first_name" class="form-control" id="first_name"
-                                   name="first_name" required>
-                            <span data-ng-show="actorForm.first_name.$invalid && actorForm.first_name.$dirty"
+                                   name="first_name" required data-ng-pattern="/^[a-zA-Z\s]*$/">
+                            <span data-ng-show="actorForm.first_name.$error.required && actorForm.first_name.$dirty"
                                   class="help-block error">This field is required.</span>
+                            <span data-ng-show="actorForm.first_name.$error.pattern"
+                                  class="help-block error">This field only should contain letters.</span>
                         </div>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="last_name" class="col-md-2 control-label">Last Name</label>
+                        <label for="last_name" class="col-md-2 control-label require">Last Name</label>
 
                         <div class="col-md-10">
-                            <input type="text" data-ng-model="actor.last_name" class="form-control" id="last_name">
+                            <input type="text" data-ng-model="actor.last_name" class="form-control" id="last_name"
+                                   name="last_name" required data-ng-pattern="/^[a-zA-Z\s]*$/">
+                            <span data-ng-show="actorForm.last_name.$error.required && actorForm.last_name.$dirty"
+                                  class="help-block error">This field is required.</span>
+                            <span data-ng-show="actorForm.last_name.$error.pattern"
+                                  class="help-block error">This field only should contain letters.</span>
                         </div>
                     </div>
 
@@ -48,16 +55,18 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="birth_date" class="col-md-2 control-label">Birth Date</label>
+                        <label for="birth_date" class="col-md-2 control-label require">Birth Date</label>
 
                         <div class="col-md-10">
                             <datepicker date-format="dd/M/yyyy" selector="form-control">
                                 <div class="input-group">
-                                    <input id="birth_date" placeholder="Choose a date" class="form-control"
-                                           data-ng-model="actor.birth_date"/>
+                                    <input id="birth_date" name="birth_date" placeholder="Choose a date" class="form-control"
+                                           data-ng-model="actor.birth_date" required/>
                                     <span class="input-group-addon" style="cursor: pointer"><i
                                             class="fa fa-lg fa-calendar"></i></span>
                                 </div>
+                                <span data-ng-show="actorForm.birth_date.$invalid && actorForm.birth_date.$dirty"
+                                      class="help-block error">This field is required.</span>
                             </datepicker>
                         </div>
                     </div>
