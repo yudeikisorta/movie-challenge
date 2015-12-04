@@ -18,10 +18,6 @@ $brand-warning:         #F39C12 !default;
 $brand-danger:          #E74C3C !default;
 
 
-//== Scaffolding
-//
-//## Settings for some of the most global styles.
-
 //** Background color for `<body>`.
 $body-bg:               #fff !default;
 //** Global text color on `<body>`.
@@ -187,9 +183,7 @@ $input-color:                    $text-color !default;
 //** `<input>` border color
 $input-border:                   #dce4ec !default;
 
-// TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4
 //** Default `.form-control` border radius
-// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
 $input-border-radius:            $border-radius-base !default;
 //** Large `.form-control` border radius
 $input-border-radius-large:      $border-radius-large !default;
