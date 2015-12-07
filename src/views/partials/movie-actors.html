@@ -5,7 +5,7 @@
 </ul>
 
 <blockquote>
-    <h3 style="margin-top: 0">{{movie.name | uppercase}}</h3>
+    <h3 id="movie-name">{{movie.name | uppercase}}</h3>
 
     <p>
         Year: {{movie.release_year}}
@@ -16,9 +16,9 @@
     </p>
 </blockquote>
 
-<div class="row">
+<div class="row movie-actors-container">
     <div class="col-md-5">
-        <select style="margin-bottom: 20px" data-placeholder="Search" ui-select2="{width: '100%'}"
+        <select data-placeholder="Search" ui-select2="{width: '100%'}"
                 data-ng-model='selectedActor' data-ng-change="addActor()">
             <option value=""></option>
             <option data-ng-repeat="item in actors"
@@ -26,11 +26,11 @@
             </option>
         </select>
 
-        <div style="max-height: 320px; overflow-y: auto">
-            <table class="table table-striped table-hover" data-ng-show="filteredActors.length">
+        <div class="movie-actors-list">
+            <table class="table table-striped table-hover" data-ng-show="movieActors.length">
                 <tbody>
-                <tr data-ng-repeat="item in filteredActors">
-                    <td style="width: 5%"><i class="fa fa-remove" data-ng-click="removeActorFromMovie(item.id)"></i></td>
+                <tr data-ng-repeat="item in movieActors">
+                    <td><i class="fa fa-remove" data-ng-click="removeActorFromMovie(item.id)"></i></td>
                     <td><a data-ng-href="#/actors/edit/{{item.id}}">
                         {{ item.first_name | capitalize }} {{ item.last_name | capitalize}}</a>
                     </td>
@@ -39,7 +39,7 @@
             </table>
         </div>
 
-        <div class="alert alert-danger" data-ng-show="!filteredActors.length">
+        <div class="alert alert-danger" data-ng-show="!movieActors.length">
             <p>There aren't actors added to this movie.</p>
         </div>
     </div>
@@ -55,17 +55,24 @@
 
                         <div class="col-md-9">
                             <input type="text" data-ng-model="actor.first_name" class="form-control" id="first_name"
-                                   required>
-                            <span data-ng-show="actorForm.first_name.$invalid && actorForm.first_name.$dirty"
+                                   name="first_name" required data-ng-pattern="/^[a-zA-Z\s]*$/">
+                            <span data-ng-show="actorForm.first_name.$error.required && actorForm.first_name.$dirty"
                                   class="help-block error">This field is required.</span>
+                            <span data-ng-show="actorForm.first_name.$error.pattern"
+                                  class="help-block error">This field only should contain letters.</span>
                         </div>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="last_name" class="col-md-3 control-label">Last Name</label>
+                        <label for="last_name" class="col-md-3 control-label require">Last Name</label>
 
                         <div class="col-md-9">
-                            <input type="text" data-ng-model="actor.last_name" class="form-control" id="last_name">
+                            <input type="text" data-ng-model="actor.last_name" class="form-control" id="last_name"
+                                   name="last_name" required data-ng-pattern="/^[a-zA-Z\s]*$/">
+                            <span data-ng-show="actorForm.last_name.$error.required && actorForm.last_name.$dirty"
+                                  class="help-block error">This field is required.</span>
+                            <span data-ng-show="actorForm.last_name.$error.pattern"
+                                  class="help-block error">This field only should contain letters.</span>
                         </div>
                     </div>
 
@@ -83,25 +90,28 @@
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="birth_date" class="col-md-3 control-label">Birth Date</label>
+                        <label for="birth_date" class="col-md-3 control-label require">Birth Date</label>
 
                         <div class="col-md-9">
                             <datepicker date-format="dd/M/yyyy" selector="form-control">
                                 <div class="input-group">
-                                    <input id="birth_date" placeholder="Choose a date" class="form-control"
-                                           data-ng-model="actor.birth_date"/>
-                                    <span class="input-group-addon" style="cursor: pointer"><i
+                                    <input id="birth_date" name="birth_date" placeholder="Choose a date"
+                                           class="form-control"
+                                           data-ng-model="actor.birth_date" required/>
+                                    <span class="input-group-addon"><i
                                             class="fa fa-lg fa-calendar"></i></span>
                                 </div>
+                                <span data-ng-show="actorForm.birth_date.$invalid && actorForm.birth_date.$dirty"
+                                      class="help-block error">This field is required.</span>
                             </datepicker>
                         </div>
                     </div>
 
                     <div class="form-group col-md-12">
                         <div class="col-md-6 col-lg-offset-3">
-                            <a type="reset" class="btn btn-default" data-ng-href="#/movies">Cancel</a>
                             <button type="submit" class="btn btn-primary" data-ng-click="createActor()"
-                                    data-ng-disabled="actorForm.$invalid">Add</button>
+                                    data-ng-disabled="actorForm.$invalid">Add
+                            </button>
                         </div>
                     </div>
                 </div>

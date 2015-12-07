@@ -60,14 +60,33 @@
                         <div class="col-md-10">
                             <datepicker date-format="dd/M/yyyy" selector="form-control">
                                 <div class="input-group">
-                                    <input id="birth_date" name="birth_date" placeholder="Choose a date" class="form-control"
+                                    <input id="birth_date" name="birth_date" placeholder="Choose a date"
+                                           class="form-control"
                                            data-ng-model="actor.birth_date" required/>
-                                    <span class="input-group-addon" style="cursor: pointer"><i
+                                    <span class="input-group-addon"><i
                                             class="fa fa-lg fa-calendar"></i></span>
                                 </div>
                                 <span data-ng-show="actorForm.birth_date.$invalid && actorForm.birth_date.$dirty"
                                       class="help-block error">This field is required.</span>
                             </datepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="picture" class="col-md-2 control-label require">Picture</label>
+
+                        <div class="col-md-10">
+                            <input type='file' id="picture" name="picture" data-ng-model='file' base-sixty-four-input
+                                   data-ng-change="getImage()" accept="image/*" data-ng-required='!actor.picture'>
+                             <span data-ng-show="actorForm.picture.$invalid && actorForm.picture.$dirty"
+                                   class="help-block error">This field is required.</span>
+
+                            <div data-ng-if="actor.picture" class="thumbnail col-md-4">
+                                <img data-ng-src="data:image/png;base64,{{actor.picture}}">
+                            </div>
+                            <div data-ng-if="!actor.picture" class="thumbnail col-md-4">
+                                <img data-ng-src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image"/>
+                            </div>
                         </div>
                     </div>
 

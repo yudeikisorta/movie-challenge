@@ -1,9 +1,12 @@
 <div class="col-md-6" data-ng-show="movies.length" data-ng-repeat="item in movies">
-    <div class="jumbotron" style="padding: 20px">
+    <div id="home-movie-container" class="jumbotron">
         <div class="row">
+            <div class="thumbnail" data-ng-if="item.picture">
+                <img data-ng-src="data:image/png;base64,{{item.picture}}">
+            </div>
             <div class="col-md-10">
-                <h2 style="margin-top: 0">{{item.name | capitalize }}</h2>
-                <span style="display: block">Director: {{ item.director | capitalize }}</span>
+                <h2>{{item.name | capitalize }}</h2>
+                <span>Director: {{ item.director | capitalize }}</span>
                 <span>Year: {{ item.release_year}}</span>
             </div>
 
@@ -15,5 +18,6 @@
 
 <div class="jumbotron" data-ng-hide="movies.length">
     <p>There are no movies added. To add a new one click on the link below.</p>
+
     <p><a class="btn btn-primary btn-lg" data-ng-href="#/movies/create">Movie</a></p>
 </div>

@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
-    <li><a href="#">Home</a></li>
-    <li><a href="#/actors">Actors</a></li>
+    <li><a data-ng-href="#">Home</a></li>
+    <li><a data-ng-href="#/actors">Actors</a></li>
     <li class="active">Detail</li>
 </ul>
 
@@ -16,16 +16,19 @@
         <p><strong>Birth Date:</strong> {{ actor.birth_date }}</p>
 
         <hr/>
-        <div class="list-group col-md-6" data-ng-show="movies.length">
-            <a class="list-group-item">
-                <strong>MOVIES</strong>
-            </a>
-            <a data-ng-repeat="movie in movies" data-ng-href="#/movies/detail/{{movie.id}}" class="list-group-item">
-                {{movie.name | capitalize}}
-            </a>
-        </div>
-        <div class="alert alert-danger col-md-4" data-ng-show="!movies.length">
-            {{actor.first_name | capitalize }} {{actor.last_name | capitalize }} didn't act in any movie.
+
+        <div data-ng-hide="load == true">
+            <div class="list-group col-md-6" data-ng-show="movies.length">
+                <a class="list-group-item">
+                    <strong>MOVIES</strong>
+                </a>
+                <a data-ng-repeat="movie in movies" data-ng-href="#/movies/detail/{{movie.id}}" class="list-group-item">
+                    {{movie.name | capitalize}}
+                </a>
+            </div>
+            <div class="alert alert-danger col-md-4" data-ng-show="!movies.length">
+                {{actor.first_name | capitalize }} {{actor.last_name | capitalize }} didn't act in any movie.
+            </div>
         </div>
     </div>
 </div>
