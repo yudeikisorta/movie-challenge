@@ -5,5 +5,6 @@ var challengeApp = angular.module('challengeApp', [
     '720kb.datepicker',
     'angular-websql',
     'angular-input-stars',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'naif.base64'
 ]);

@@ -1,7 +1,6 @@
 challengeApp.factory('DatabaseService', function($webSql) {
     var db = $webSql.openDatabase('challenge', '1.0', 'Challenge DB', 2 * 1024 * 1024);
 
-    //db.dropTable('movies');
     db.createTable('movies', {
         "id":{
             "type": "INTEGER",
@@ -17,6 +16,9 @@ challengeApp.factory('DatabaseService', function($webSql) {
         "name":{
             "type": "TEXT",
             "null": "NOT NULL"
+        },
+        "picture":{
+            "type": "TEXT"
         },
         "overview":{
             "type": "TEXT"
@@ -44,7 +46,6 @@ challengeApp.factory('DatabaseService', function($webSql) {
         }
     });
 
-   // db.dropTable('movie_rates');
     db.createTable('movie_rates', {
         "id_movie":{
             "type": "INTEGER"
@@ -55,7 +56,6 @@ challengeApp.factory('DatabaseService', function($webSql) {
         }
     });
 
-    //db.dropTable('movie_actor');
     db.createTable('movie_actor', {
         "id":{
             "type": "INTEGER",
@@ -73,7 +73,6 @@ challengeApp.factory('DatabaseService', function($webSql) {
         }
     });
 
-    //db.dropTable('actors');
     db.createTable('actors', {
         "id":{
             "type": "INTEGER",
@@ -91,6 +90,9 @@ challengeApp.factory('DatabaseService', function($webSql) {
             "null": "NOT NULL"
         },
         "last_name":{
+            "type": "TEXT"
+        },
+        "picture":{
             "type": "TEXT"
         },
         "gender":{
