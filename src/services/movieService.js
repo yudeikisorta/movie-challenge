@@ -102,7 +102,7 @@ challengeApp.factory('MovieService', function (DatabaseService, ActorService, $f
             if(results.length){
                 var actorString = '';
                 angular.forEach(results, function (elem, index) {
-                    if (index == 0) {
+                    if (index === 0) {
                         actorString += 'movie_actor.id_actor = ' + elem.id;
                     } else {
                         actorString += ' OR movie_actor.id_actor = ' + elem.id;
@@ -122,7 +122,7 @@ challengeApp.factory('MovieService', function (DatabaseService, ActorService, $f
                             }
                         }
                         return movies;
-                    })
+                    });
             }
         });
     };
