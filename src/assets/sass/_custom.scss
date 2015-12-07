@@ -1,0 +1,79 @@
+body > .container {
+  padding-top: 100px
+}
+
+#home-movie-container {
+  padding: 20px;
+
+  h2 {
+    margin-top: 0
+  }
+}
+
+h3#movie-name {
+  margin-top: 0
+}
+
+.movie-actors-container {
+  .select2-container {
+    margin-bottom: 20px
+  }
+
+  table > tbody {
+    td:first-child {
+      width: 5%
+    }
+  }
+;
+}
+
+#movie-info {
+  margin-top: 20px
+}
+
+#genre-info {
+  margin-left: 5px
+}
+
+.movie-actors-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.actor-list, .movie-list {
+  .pull-right {
+    padding-right: 0;
+  }
+}
+
+.table-actors > tbody {
+  td:first-child {
+    width: 30%;
+  }
+
+  td:last-child {
+    text-align: center
+  }
+}
+
+.table-movies > tbody {
+  td:first-child {
+    width: 30%
+  }
+
+  td:nth-child(2){
+    width: 15%
+  }
+
+  td:nth-child(3){
+    width: 20%
+  }
+
+  td:nth-child(4){
+    width: 15%
+  }
+
+  td:last-child{
+    text-align: center;
+  }
+}

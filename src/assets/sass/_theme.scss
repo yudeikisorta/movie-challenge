@@ -7,7 +7,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
 .navbar {
   border-width: 0;
 
-  &-default {
+  & -default {
 
     .badge {
       background-color: #fff;
@@ -15,7 +15,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
     }
   }
 
-  &-inverse {
+  & -inverse {
 
     .badge {
       background-color: #fff;
@@ -23,7 +23,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
     }
   }
 
-  &-brand {
+  & -brand {
     line-height: 1;
   }
 }
@@ -49,7 +49,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
   color: $brand-primary;
 }
 
-.text-success,
+.text-success,Container
 .text-success:hover {
   color: $brand-success;
 }
@@ -104,12 +104,12 @@ table,
     border: none;
   }
 
-  &-bordered > thead > tr > th,
-  &-bordered > tbody > tr > th,
-  &-bordered > tfoot > tr > th,
-  &-bordered > thead > tr > td,
-  &-bordered > tbody > tr > td,
-  &-bordered > tfoot > tr > td {
+  & -bordered > thead > tr > th,
+  & -bordered > tbody > tr > th,
+  & -bordered > tfoot > tr > th,
+  & -bordered > thead > tr > td,
+  & -bordered > tbody > tr > td,
+  & -bordered > tfoot > tr > td {
     border: 1px solid $table-border-color;
   }
 }
@@ -117,7 +117,7 @@ table,
 // Forms ======================================================================
 
 .form-control,
-input{
+input {
   border-width: 2px;
   @include box-shadow(none);
 
@@ -218,10 +218,10 @@ input{
   }
 
   .disabled {
-    &>a,
-    &>a:hover,
-    &>a:focus,
-    &>span {
+    & > a,
+    & > a:hover,
+    & > a:focus,
+    & > span {
       background-color: $pagination-disabled-bg;
     }
   }
@@ -274,7 +274,7 @@ a.list-group-item {
     border-color: $list-group-border;
   }
 
-  &-success {
+  & -success {
     &.active {
       background-color: $state-success-bg;
     }
@@ -285,22 +285,22 @@ a.list-group-item {
     }
   }
 
-  &-warning {
+  & -warning {
     &.active {
       background-color: $state-warning-bg;
     }
-    
+
     &.active:hover,
     &.active:focus {
       background-color: darken($state-warning-bg, 5%);
     }
   }
 
-  &-danger {
+  & -danger {
     &.active {
       background-color: $state-danger-bg;
     }
-    
+
     &.active:hover,
     &.active:focus {
       background-color: darken($state-danger-bg, 5%);
@@ -309,7 +309,7 @@ a.list-group-item {
 }
 
 .panel {
-  &-default {
+  & -default {
     .close {
       color: $text-color;
     }
@@ -327,10 +327,25 @@ a.list-group-item {
 }
 
 .form-group .require.control-label:after {
-  content:" *";
-  color:$brand-danger;
+  content: " *";
+  color: $brand-danger;
 }
 
-.error.help-block{
+.error.help-block {
   color: $brand-danger;
+}
+
+.related-movies{
+  .item-movie{
+    padding-left: 0;
+  }
+}
+
+.thumbnail {
+  margin-top: 20px;
+
+  img{
+    width: 200px;
+    height: 200px;
+  }
 }
