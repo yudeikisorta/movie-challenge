@@ -70,7 +70,8 @@ gulp.task('bower-js', function() {
             './bower_components/angularjs-datepicker/src/js/angular-datepicker.js',
             './bower_components/angular-input-stars-directive/angular-input-stars.js',
             './bower_components/angular-websql/angular-websql.min.js',
-            './bower_components/angularUtils-pagination/dirPagination.js'
+            './bower_components/angularUtils-pagination/dirPagination.js',
+            './bower_components/angular-base64-upload/src/angular-base64-upload.js'
         ])
         .pipe(concat('vendor.js'))
         .pipe(uglify())
