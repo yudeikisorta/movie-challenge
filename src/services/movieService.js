@@ -1,4 +1,4 @@
-challengeApp.factory('MovieService', function (DatabaseService, $filter) {
+challengeApp.factory('MovieService', function (DatabaseService, ActorService, $filter) {
     var factory = {};
 
     var genre = [
@@ -15,6 +15,7 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
         return genre;
     };
 
+    /* Get a list of genre names */
     factory.getGenreNames = function (genresIds) {
         var items = [];
         if (genresIds.length) {
@@ -35,10 +36,12 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
         return items;
     };
 
+    /* Determine rating average */
     factory.getRatingAverage = function (movie) {
         return $filter('number')(movie.rating_sum / movie.votes_count, 1);
     };
 
+    /* Get list of movies */
     factory.getList = function () {
         return DatabaseService.selectAll('movies')
             .then(function (results) {
@@ -52,17 +55,79 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
             });
     };
 
-    factory.select = function (idMovie) {
+    /* Select an specific movie and clear all the relations lists if this param is specified */
+    factory.select = function (idMovie, relations) {
         return DatabaseService.select('movies', {"id": idMovie})
             .then(function (results) {
                 var movie = angular.copy(results.rows.item(0));
-                movie.genre = factory.getGenreNames(movie.genre);
+                movie.genreNames = factory.getGenreNames(movie.genre);
                 movie.rating = factory.getRatingAverage(movie);
+
+                if (relations) {
+                    relatedMovies = [];
+                    ids = [];
+                }
 
                 return movie;
             });
     };
 
+    var relatedMovies = [];
+    var ids = [];
+
+    /*  Get related movies by genre */
+    factory.getRelatedMovies = function (movie, j) {
+        var genre = JSON.parse("[" + movie.genre + "]");
+        return DatabaseService.executeQuery('SELECT * FROM movies WHERE movies.genre LIKE "%' + genre[j] + '%" AND movies.id !=' + movie.id).then(function (results) {
+
+            for (var i = 0; i < results.rows.length; i++) {
+                if (ids.indexOf(results.rows.item(i).id) == -1) {
+                    relatedMovies.push(results.rows.item(i));
+                    ids.push(results.rows.item(i).id);
+                }
+            }
+            if (genre.length - 1 >= j + 1) {
+                return factory.getRelatedMovies(movie, j + 1);
+            }
+            else {
+                movie.relatedMovies = relatedMovies;
+                return movie;
+            }
+        });
+    };
+
+    /* Get related movies by actor */
+    factory.relatedMoviesByActor = function (movie) {
+        return ActorService.getActorsByMovie(movie.id).then(function (results) {
+            if(results.length){
+                var actorString = '';
+                angular.forEach(results, function (elem, index) {
+                    if (index == 0) {
+                        actorString += 'movie_actor.id_actor = ' + elem.id;
+                    } else {
+                        actorString += ' OR movie_actor.id_actor = ' + elem.id;
+                    }
+                });
+
+                var ids = [];
+                var movies = [];
+                return DatabaseService.executeQuery('SELECT movies.* FROM movies INNER JOIN movie_actor ON movies.id=movie_actor.id_movie ' +
+                        'WHERE (' + actorString + ') AND movies.id != ?', [movie.id])
+                    .then(function (results) {
+                        for (var i = 0; i < results.rows.length; i++) {
+                            var item = results.rows.item(i);
+                            if (ids.indexOf(item.id) == -1) {
+                                movies.push(item);
+                                ids.push(item.id);
+                            }
+                        }
+                        return movies;
+                    })
+            }
+        });
+    };
+
+    /* Select an specific movie for updating */
     factory.selectForUpdate = function (idMovie) {
         return DatabaseService.select('movies', {"id": idMovie})
             .then(function (results) {
@@ -73,14 +138,17 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
             });
     };
 
+    /* Create a new movie */
     factory.create = function (movie) {
-        DatabaseService.insert('movies', movie);
+        return DatabaseService.insert('movies', movie);
     };
 
+    /* Update the specified movie */
     factory.update = function (movie) {
-        DatabaseService.update('movies', movie, {'id': movie.id});
+        return DatabaseService.update('movies', movie, {'id': movie.id});
     };
 
+    /* Delete the specified movie */
     factory.delete = function (idMovie) {
         return DatabaseService.del("movies", {"id": idMovie})
             .then(function (results) {
@@ -91,6 +159,7 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
             });
     };
 
+    /* Get last rate of the movie */
     factory.getMovieLastRate = function (idMovie) {
         return DatabaseService.select('movie_rates', {"id_movie": idMovie})
             .then(function (results) {
@@ -104,6 +173,7 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
             });
     };
 
+    /* Update rating for the specified movie */
     factory.updateRating = function (movie, rate) {
         DatabaseService.insert('movie_rates', {'id_movie': movie.id, 'rate': rate});
 
@@ -115,14 +185,18 @@ challengeApp.factory('MovieService', function (DatabaseService, $filter) {
         };
         return DatabaseService.update('movies', params, {'id': movie.id})
             .then(function (results) {
-                return factory.select(movie.id);
+                movie.votes_count = votes;
+                movie.rating_sum = rating_sum;
+                movie.rating = factory.getRatingAverage(movie);
+                return movie;
             });
     };
 
+    /* Get movies for the specified actor */
     factory.getMoviesByActor = function (idActor) {
         return DatabaseService.executeQuery('SELECT movies.* FROM movies ' +
-            'LEFT JOIN movie_actor ON movie_actor.id_movie = movies.id ' +
-            'WHERE movie_actor.id_actor = ?', [idActor]).then(function (results) {
+                'LEFT JOIN movie_actor ON movie_actor.id_movie = movies.id ' +
+                'WHERE movie_actor.id_actor = ?', [idActor]).then(function (results) {
             var items = [];
             for (var i = 0; i < results.rows.length; i++) {
                 items.push(results.rows.item(i));
